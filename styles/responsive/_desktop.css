@@ -1,0 +1,65 @@
+/* Desktop Styles (1024px - 1439px) */
+@media (min-width: 1024px) {
+  .blog-item.desktop {
+    border-radius: var(--radius-xl);
+    margin-bottom: var(--space-lg);
+  }
+
+  .blog-item.desktop .blog-card-image-container {
+    height: 200px;
+  }
+
+  .blog-item.desktop .blog-card-content {
+    padding: var(--space-lg);
+  }
+
+  .blog-item.desktop .blog-card-title {
+    font-size: var(--font-size-xl);
+    -webkit-line-clamp: 2;
+  }
+
+  .blog-item.desktop .blog-card-excerpt {
+    font-size: var(--font-size-base);
+    -webkit-line-clamp: 3;
+  }
+
+  /* Blog Grid */
+  .blog-grid.desktop {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-lg);
+    padding: var(--space-lg);
+  }
+
+  /* Category Filters */
+  .category-filters.desktop {
+    display: flex;
+    gap: var(--space-md);
+    justify-content: center;
+    padding: var(--space-lg);
+    margin-bottom: var(--space-xl);
+  }
+
+  .category-button.desktop {
+    padding: 1rem 2rem;
+    font-size: var(--font-size-base);
+  }
+
+  /* Section Titles */
+  .section-title.desktop {
+    font-size: 2rem;
+    padding: 0 var(--space-lg);
+    margin-bottom: var(--space-xl);
+  }
+
+  /* Container */
+  .container.desktop {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  /* Hide elements on desktop */
+  .desktop-hidden {
+    display: none !important;
+  }
+}

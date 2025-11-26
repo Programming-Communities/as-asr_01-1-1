@@ -1,0 +1,79 @@
+/* Mobile First Styles (320px - 767px) */
+
+/* Blog Items */
+.blog-item.mobile {
+  border-radius: var(--radius-md);
+  margin-bottom: var(--space-sm);
+}
+
+.blog-item.mobile .blog-card-image-container {
+  height: 160px;
+}
+
+.blog-item.mobile .blog-card-content {
+  padding: var(--space-sm);
+}
+
+.blog-item.mobile .blog-card-title {
+  font-size: var(--font-size-base);
+  -webkit-line-clamp: 2;
+}
+
+.blog-item.mobile .blog-card-excerpt {
+  font-size: var(--font-size-xs);
+  -webkit-line-clamp: 2;
+}
+
+/* Blog Grid */
+.blog-grid.mobile {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-sm);
+  padding: var(--space-sm);
+}
+
+/* Category Filters */
+.category-filters.mobile {
+  display: flex;
+  gap: var(--space-xs);
+  overflow-x: auto;
+  padding: var(--space-sm);
+  margin-bottom: var(--space-md);
+}
+
+.category-button.mobile {
+  padding: 0.5rem 1rem;
+  font-size: var(--font-size-xs);
+  white-space: nowrap;
+}
+
+/* Section Titles */
+.section-title.mobile {
+  font-size: 1.25rem;
+  padding: 0 var(--space-sm);
+  margin-bottom: var(--space-md);
+}
+
+/* Container padding */
+.container.mobile {
+  padding-left: var(--space-sm);
+  padding-right: var(--space-sm);
+}
+
+/* Hide elements on mobile */
+.mobile-hidden {
+  display: none !important;
+}
+
+/* Mobile specific utilities */
+@media (max-width: 767px) {
+  .text-mobile-sm { font-size: var(--font-size-xs); }
+  .text-mobile-base { font-size: var(--font-size-sm); }
+  .text-mobile-lg { font-size: var(--font-size-base); }
+  
+  .padding-mobile { padding: var(--space-sm); }
+  .margin-mobile { margin: var(--space-sm); }
+  
+  .grid-cols-mobile-1 { grid-template-columns: 1fr; }
+  .grid-cols-mobile-2 { grid-template-columns: repeat(2, 1fr); }
+}

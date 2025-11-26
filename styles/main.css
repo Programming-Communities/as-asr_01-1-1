@@ -1,0 +1,25 @@
+/* Base Styles */
+@import './base/_reset.css';
+@import './base/_typography.css';
+@import './base/_variables.css';
+@import './base/_utilities.css';
+
+/* Component Styles */
+@import './components/_blog-card.css';
+@import './components/_blog-list.css';
+@import './components/_buttons.css';
+
+/* Layout Styles */
+@import './layouts/_header.css';
+@import './layouts/_footer.css';
+@import './layouts/_grid.css';
+
+/* Responsive Styles - Mobile First */
+@import './responsive/_mobile.css';
+@import './responsive/_tablet.css';
+@import './responsive/_desktop.css';
+@import './responsive/_lg.css';
+@import './responsive/_4k.css';
+
+/* Your existing global styles */
+@import "tailwindcss";

@@ -1,0 +1,60 @@
+/* Large Desktop Styles (1440px - 1919px) */
+@media (min-width: 1440px) {
+  .blog-item.lg {
+    border-radius: var(--radius-xl);
+    margin-bottom: var(--space-xl);
+  }
+
+  .blog-item.lg .blog-card-image-container {
+    height: 240px;
+  }
+
+  .blog-item.lg .blog-card-content {
+    padding: var(--space-xl);
+  }
+
+  .blog-item.lg .blog-card-title {
+    font-size: var(--font-size-2xl);
+    -webkit-line-clamp: 2;
+  }
+
+  .blog-item.lg .blog-card-excerpt {
+    font-size: var(--font-size-lg);
+    -webkit-line-clamp: 3;
+  }
+
+  /* Blog Grid */
+  .blog-grid.lg {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--space-xl);
+    padding: var(--space-xl);
+  }
+
+  /* Category Filters */
+  .category-filters.lg {
+    display: flex;
+    gap: var(--space-lg);
+    justify-content: center;
+    padding: var(--space-xl);
+    margin-bottom: var(--space-xl);
+  }
+
+  .category-button.lg {
+    padding: 1.25rem 2.5rem;
+    font-size: var(--font-size-lg);
+  }
+
+  /* Section Titles */
+  .section-title.lg {
+    font-size: 2.5rem;
+    padding: 0 var(--space-xl);
+    margin-bottom: var(--space-xl);
+  }
+
+  /* Container */
+  .container.lg {
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+}
