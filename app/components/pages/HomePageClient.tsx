@@ -24,19 +24,33 @@ export default function HomePageClient() {
         console.log('🔄 Fetching posts from API...');
         
         const response = await fetch('/api/posts');
-        const data = await response.json();
         
-        console.log('📦 API Response:', data);
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
         
-        if (data && data.posts && Array.isArray(data.posts)) {
+        const text = await response.text();
+        console.log('📦 API Response text:', text);
+        
+        let data;
+        try {
+          data = JSON.parse(text);
+        } catch (parseError) {
+          console.error('❌ JSON Parse Error:', parseError);
+          throw new Error('Invalid JSON response from server');
+        }
+        
+        console.log('📦 Parsed API Data:', data);
+        
+        if (data && data.success && Array.isArray(data.posts)) {
           setPosts(data.posts);
           console.log('✅ Posts loaded:', data.posts.length);
         } else {
-          setError('No posts found in response');
+          setError(data?.error || 'No posts found in response');
           console.log('❌ API Data issue:', data);
         }
       } catch (err) {
-        const errorMsg = 'Network error: ' + (err as Error).message;
+        const errorMsg = err instanceof Error ? err.message : 'Unknown error occurred';
         setError(errorMsg);
         console.log('❌ Fetch Error:', err);
       } finally {
@@ -50,7 +64,7 @@ export default function HomePageClient() {
   // Server-side render fallback
   if (!isMounted) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-red-50 to-pink-50">
+      <div className="min-h-screen bg-linear-to-br from-red-50 to-pink-50">
         <div className="container mx-auto px-4 py-8">
           <div className="text-center mb-8">
             <h2 className="text-2xl font-bold text-gray-900">Loading...</h2>
@@ -67,7 +81,7 @@ export default function HomePageClient() {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-red-50 to-pink-50">
+      <div className="min-h-screen bg-linear-to-br from-red-50 to-pink-50">
         <div className="container mx-auto px-4 py-8">
           <div className="text-center mb-8">
             <h2 className="text-2xl font-bold text-gray-900">Loading Posts...</h2>
@@ -84,7 +98,7 @@ export default function HomePageClient() {
 
   if (error) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-red-50 to-pink-50 flex items-center justify-center">
+      <div className="min-h-screen bg-linear-to-br from-red-50 to-pink-50 flex items-center justify-center">
         <div className="text-center">
           <h2 className="text-2xl font-bold text-red-600 mb-4">Error Loading Posts</h2>
           <p className="text-gray-600 mb-4">{error}</p>
@@ -100,9 +114,9 @@ export default function HomePageClient() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-red-50 to-pink-50">
+    <div className="min-h-screen bg-linear-to-br from-red-50 to-pink-50">
       {/* Hero Section */}
-      <section className="bg-gradient-to-r from-red-500 to-pink-500 text-white py-20">
+      <section className="bg-linear-to-r from-red-500 to-pink-500 text-white py-20">
         <div className="container mx-auto px-4 text-center">
           <h1 className="text-4xl md:text-6xl font-bold mb-6">
             Al-Asr Centers

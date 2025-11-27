@@ -1,10 +1,10 @@
-// components/shared/Analytics.tsx
 'use client';
 
-import { useEffect } from 'react';
+import { useEffect, Suspense } from 'react';
 import { usePathname, useSearchParams } from 'next/navigation';
 
-export function Analytics() {
+// Component that uses useSearchParams - wrap this in Suspense
+function AnalyticsContent() {
   const pathname = usePathname();
   const searchParams = useSearchParams();
 
@@ -12,7 +12,7 @@ export function Analytics() {
     // Track page views
     const url = `${pathname}${searchParams?.toString() ? `?${searchParams.toString()}` : ''}`;
     
-    console.log('Page view:', url);
+    console.log('📊 Page view:', url);
     
     // Example: Send to Google Analytics
     // if (typeof gtag !== 'undefined') {
@@ -32,3 +32,14 @@ export function Analytics() {
   // This component doesn't render anything visible
   return null;
 }
+
+// Main Analytics component with Suspense boundary
+export function Analytics() {
+  return (
+    <Suspense fallback={null}>
+      <AnalyticsContent />
+    </Suspense>
+  );
+}
+
+export default Analytics;

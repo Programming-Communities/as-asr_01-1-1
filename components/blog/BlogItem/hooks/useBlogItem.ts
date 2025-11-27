@@ -20,9 +20,7 @@ export function useBlogItem({ title, excerpt, categories, date, slug, index }: U
   const [showSocialMenu, setShowSocialMenu] = useState(false);
   const [isHovered, setIsHovered] = useState(false);
   const [isCardLoading, setIsCardLoading] = useState(false);
-
-  // Remove visibility logic - causing issues
-  const [isVisible] = useState(true);
+  const [isVisible, setIsVisible] = useState(false);
 
   const postUrl = `${typeof window !== 'undefined' ? window.location.origin : ''}/posts/${slug}`;
 
@@ -37,6 +35,15 @@ export function useBlogItem({ title, excerpt, categories, date, slug, index }: U
     day: 'numeric',
     year: 'numeric'
   });
+
+  // Visibility logic - cards ko gradually show karega
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setIsVisible(true);
+    }, index * 100); // Staggered animation
+
+    return () => clearTimeout(timer);
+  }, [index]);
 
   const handleNavigation = useCallback(() => {
     setIsCardLoading(true);

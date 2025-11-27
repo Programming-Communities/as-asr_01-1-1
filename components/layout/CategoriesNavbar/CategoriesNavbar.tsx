@@ -1,4 +1,3 @@
-// components/layout/CategoriesNavbar/CategoriesNavbar.tsx
 'use client';
 
 import { useResponsive } from '@/hooks/useResponsive';
@@ -9,9 +8,9 @@ import CategoriesNavbarLg from './CategoriesNavbar.lg';
 import CategoriesNavbar4k from './CategoriesNavbar.4k';
 
 export default function CategoriesNavbar() {
-  const { breakpoint } = useResponsive(); // ✅ Use breakpoint instead
+  const { device } = useResponsive(); // ✅ Use device instead of breakpoint
 
-  switch (breakpoint) { // ✅ Use breakpoint instead
+  switch (device) { // ✅ Use device instead of breakpoint
     case 'mobile':
       return <CategoriesNavbarMobile />;
     case 'tablet':

@@ -1,3 +1,5 @@
+import React from 'react';
+
 // Performance monitoring and optimization utilities
 
 // Performance metrics
@@ -180,10 +182,13 @@ export class MemoryManager {
   }
 }
 
-// Bundle optimization helpers
+// Bundle optimization helpers - FIXED: No JSX in .ts file
 export function dynamicImport(component: () => Promise<any>, loadingComponent?: React.ReactNode) {
   if (typeof window === 'undefined') {
-    return { default: () => loadingComponent || <div>Loading...</div> };
+    // Return simple component for server-side rendering
+    return { 
+      default: () => loadingComponent || 'Loading...' 
+    };
   }
   
   return React.lazy(component);
@@ -199,13 +204,25 @@ export function injectCriticalCSS(css: string) {
   document.head.appendChild(style);
 }
 
-// Connection-aware loading
+// Connection-aware loading - Fix TypeScript errors
+interface NetworkInformation {
+  effectiveType?: string;
+  saveData?: boolean;
+  downlink?: number;
+}
+
+declare global {
+  interface Navigator {
+    connection?: NetworkInformation;
+  }
+}
+
 export function getConnectionInfo() {
   if (typeof window === 'undefined' || !navigator.connection) {
-    return { effectiveType: '4g', saveData: false };
+    return { effectiveType: '4g', saveData: false, downlink: 10 };
   }
   
-  const connection = navigator.connection as any;
+  const connection = navigator.connection;
   return {
     effectiveType: connection.effectiveType || '4g',
     saveData: connection.saveData || false,

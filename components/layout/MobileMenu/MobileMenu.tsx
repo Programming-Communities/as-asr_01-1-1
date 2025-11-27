@@ -13,10 +13,10 @@ interface MobileMenuProps {
 }
 
 export default function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
-  const { breakpoint } = useResponsive();
+  const { device } = useResponsive(); // ✅ Use device instead of breakpoint
 
-  // Render appropriate component based on breakpoint
-  switch (breakpoint) {
+  // Render appropriate component based on device
+  switch (device) { // ✅ Use device instead of breakpoint
     case 'mobile':
       return <MobileMenuMobile isOpen={isOpen} onClose={onClose} />;
     case 'tablet':

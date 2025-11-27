@@ -1,4 +1,3 @@
-// app/components/pages/SinglePostClient.tsx
 'use client';
 
 import { useResponsive } from '@/hooks/useResponsive';
@@ -51,6 +50,22 @@ const safeParseInt = (value: string, fallback: number = 0): number => {
 export default function SinglePostClient({ post }: SinglePostClientProps) {
   const { device, isMobile, isTablet, isDesktop } = useResponsive();
 
+  // ✅ Post undefined hone par error handling
+  if (!post) {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <div className="text-center">
+          <h1 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">
+            Post Not Found
+          </h1>
+          <p className="text-gray-600 dark:text-gray-400">
+            The requested post could not be loaded.
+          </p>
+        </div>
+      </div>
+    );
+  }
+
   const formatDate = (dateString: string) => {
     return new Date(dateString).toLocaleDateString('en-US', {
       year: 'numeric',
@@ -59,11 +74,11 @@ export default function SinglePostClient({ post }: SinglePostClientProps) {
     });
   };
 
-  // Convert post ID to number safely
-  const postId = safeParseInt(post.id, 0);
+  // ✅ Safe post ID conversion
+  const postId = safeParseInt(post?.id || '0', 0);
 
   return (
-    <article className="min-h-screen bg-gray-50 dark:bg-gray-900 py-8">
+    <article className="py-8">
       <div className="container mx-auto px-4 max-w-4xl">
         {/* Header Section */}
         <header className="mb-8 text-center">

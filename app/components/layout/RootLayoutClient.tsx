@@ -14,8 +14,8 @@ interface RootLayoutClientProps {
 
 export function RootLayoutClient({ children }: RootLayoutClientProps) {
   return (
-    <CookieProvider>
-      <ThemeProvider>
+    <ThemeProvider>
+      <CookieProvider>
         <ApolloWrapper>
           {/* Performance Monitoring */}
           {process.env.NODE_ENV === 'development' && <PerformanceMonitor />}
@@ -34,7 +34,7 @@ export function RootLayoutClient({ children }: RootLayoutClientProps) {
         
         {/* Cookie Consent */}
         <CookieConsent />
-      </ThemeProvider>
-    </CookieProvider>
+      </CookieProvider>
+    </ThemeProvider>
   );
 }

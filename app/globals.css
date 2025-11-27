@@ -103,11 +103,3 @@ html, body {
 
 
 
-/* Temporary debug - Add to globals.css */
-.blog-item {
-  border: 2px solid red !important; /* Temporary - remove after testing */
-}
-
-.blog-item * {
-  border: 1px solid blue !important; /* Temporary - remove after testing */
-}

@@ -10,10 +10,10 @@ import NavigationLg from './Navigation.lg';
 import Navigation4k from './Navigation.4k';
 
 export default function Navigation() {
-  const { breakpoint } = useResponsive();
+  const { device } = useResponsive(); // ✅ Use device instead of breakpoint
 
-  // Render appropriate component based on breakpoint
-  switch (breakpoint) {
+  // Render appropriate component based on device
+  switch (device) { // ✅ Use device instead of breakpoint
     case 'mobile':
       return <NavigationMobile />;
     case 'tablet':

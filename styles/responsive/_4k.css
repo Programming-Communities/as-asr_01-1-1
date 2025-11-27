@@ -1,30 +1,30 @@
 /* 4K Styles (1920px and above) */
 @media (min-width: 1920px) {
-  .blog-item.4k {
+  .blog-item-4k {
     border-radius: 2rem;
     margin-bottom: 2rem;
   }
 
-  .blog-item.4k .blog-card-image-container {
+  .blog-item-4k .blog-card-image-container {
     height: 300px;
   }
 
-  .blog-item.4k .blog-card-content {
+  .blog-item-4k .blog-card-content {
     padding: 2rem;
   }
 
-  .blog-item.4k .blog-card-title {
+  .blog-item-4k .blog-card-title {
     font-size: 2rem;
     -webkit-line-clamp: 2;
   }
 
-  .blog-item.4k .blog-card-excerpt {
+  .blog-item-4k .blog-card-excerpt {
     font-size: 1.25rem;
     -webkit-line-clamp: 3;
   }
 
   /* Blog Grid */
-  .blog-grid.4k {
+  .blog-grid-4k {
     display: grid;
     grid-template-columns: repeat(5, 1fr);
     gap: 2rem;
@@ -32,7 +32,7 @@
   }
 
   /* Category Filters */
-  .category-filters.4k {
+  .category-filters-4k {
     display: flex;
     gap: 2rem;
     justify-content: center;
@@ -40,20 +40,20 @@
     margin-bottom: 3rem;
   }
 
-  .category-button.4k {
+  .category-button-4k {
     padding: 1.5rem 3rem;
     font-size: 1.25rem;
   }
 
   /* Section Titles */
-  .section-title.4k {
+  .section-title-4k {
     font-size: 3rem;
     padding: 0 2rem;
     margin-bottom: 3rem;
   }
 
   /* Container */
-  .container.4k {
+  .container-4k {
     max-width: 1800px;
     margin: 0 auto;
   }
