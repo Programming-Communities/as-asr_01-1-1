@@ -1,4 +1,3 @@
-// components/layout/SidebarMenu/SidebarMenu.tsx
 'use client';
 
 import { useResponsive } from '@/hooks/useResponsive';
@@ -15,9 +14,9 @@ interface SidebarMenuProps {
 }
 
 export default function SidebarMenu({ isOpen, onClose, id = "sidebar-menu" }: SidebarMenuProps) {
-  const { device } = useResponsive(); // ✅ Changed from deviceType to device
+  const { device } = useResponsive();
 
-  switch (device) { // ✅ Changed from deviceType to device
+  switch (device) {
     case 'mobile':
       return (
         <SidebarMenuMobile

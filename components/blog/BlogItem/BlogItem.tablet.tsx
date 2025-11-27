@@ -51,10 +51,9 @@ export function BlogItemTablet({
   return (
     <article 
       data-slug={slug}
-      className={`blog-item tablet group relative w-full bg-white/95 dark:bg-gray-900/95 border border-gray-200 dark:border-gray-700 rounded-xl transition-all duration-300 cursor-pointer overflow-hidden ${
+      className={`blog-item tablet group relative w-full bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl transition-all duration-300 cursor-pointer overflow-hidden ${
         isHovered ? 'shadow-xl transform scale-[1.02] border-red-300 dark:border-red-600' : 'shadow-md'
       }`}
-      style={{ opacity: isVisible ? 1 : 0 }}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
@@ -80,7 +79,7 @@ export function BlogItemTablet({
                 loading={index < 4 ? "eager" : "lazy"}
                 priority={index < 2}
                 sizes="(max-width: 1023px) 45vw, 30vw"
-                quality={70}
+                quality={75}
                 placeholder="blur"
                 blurDataURL={blurDataURL}
               />
@@ -112,9 +111,9 @@ export function BlogItemTablet({
       </div>
 
       {/* Content Section - Tablet Optimized */}
-      <div className="p-4">
+      <div className="p-4 bg-white dark:bg-gray-800">
         {/* Meta Information */}
-        <div className="flex items-center gap-2 mb-3 text-xs text-gray-500 dark:text-gray-400">
+        <div className="flex items-center gap-2 mb-3 text-xs text-gray-600 dark:text-gray-400">
           <div className="flex items-center gap-1">
             <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
@@ -150,7 +149,7 @@ export function BlogItemTablet({
         </div>
 
         {/* Excerpt */}
-        <p className="text-sm text-gray-600 dark:text-gray-300 line-clamp-2 leading-relaxed mb-4">
+        <p className="text-sm text-gray-700 dark:text-gray-300 line-clamp-2 leading-relaxed mb-4">
           {cleanExcerpt}
         </p>
 
@@ -192,11 +191,11 @@ export function BlogItemTablet({
                     </svg>
                   </button>
                 </div>
-              <SocialShareButtons 
-  title={title}
-  url={postUrl}
-  excerpt={cleanExcerpt}
-/>
+                <SocialShareButtons 
+                  title={title}
+                  url={postUrl}
+                  excerpt={cleanExcerpt}
+                />
               </div>
             )}
           </div>

@@ -34,7 +34,6 @@ export function BlogItemDesktop({
     imageLoading,
     showSocialMenu,
     isHovered,
-    isVisible,
     isCardLoading,
     postUrl,
     cleanExcerpt,
@@ -51,15 +50,11 @@ export function BlogItemDesktop({
   return (
     <article 
       data-slug={slug}
-      className={`blog-item desktop group relative w-full bg-white/95 dark:bg-gray-900/95 border-2 border-red-900/20 dark:border-red-800/30 rounded-xl backdrop-blur-sm transition-all duration-300 ease-out cursor-pointer overflow-hidden ${
+      className={`blog-item desktop group relative w-full bg-white dark:bg-gray-800 border-2 border-red-900/20 dark:border-red-800/30 rounded-xl backdrop-blur-sm transition-all duration-300 ease-out cursor-pointer overflow-hidden ${
         isHovered 
           ? 'border-red-900/40 dark:border-red-800/60 shadow-[-8px_8px_20px_rgba(153,27,27,0.3)] dark:shadow-[-8px_8px_20px_rgba(127,29,29,0.4)] transform -translate-y-1 scale-[1.02]' 
           : 'shadow-lg'
       }`}
-      style={{ 
-        opacity: isVisible ? 1 : 0,
-        transition: 'opacity 0.3s ease-out, transform 0.2s ease-out, box-shadow 0.2s ease-out'
-      }}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
@@ -120,7 +115,7 @@ export function BlogItemDesktop({
       </div>
 
       {/* Content Section - Desktop Optimized */}
-      <div className="p-5 bg-white/80 dark:bg-gray-900/80 backdrop-blur-sm">
+      <div className="p-5 bg-white dark:bg-gray-800">
         {/* Meta Information */}
         <div className="flex items-center gap-3 mb-3 text-sm text-gray-500 dark:text-gray-400">
           <div className="flex items-center gap-1.5">
@@ -205,11 +200,11 @@ export function BlogItemDesktop({
                     </svg>
                   </button>
                 </div>
-              <SocialShareButtons 
-  title={title}
-  url={postUrl}
-  excerpt={cleanExcerpt}
-/>
+                <SocialShareButtons 
+                  title={title}
+                  url={postUrl}
+                  excerpt={cleanExcerpt}
+                />
               </div>
             )}
           </div>

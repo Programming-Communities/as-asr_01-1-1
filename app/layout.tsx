@@ -1,4 +1,3 @@
-// app/layout.tsx
 import { Inter } from 'next/font/google';
 import './globals.css';
 import { ApolloWrapper } from '@/lib/apollo-wrapper';
@@ -21,6 +20,10 @@ export default function RootLayout({
     <html lang="en" className={`${inter.variable} scroll-smooth`} suppressHydrationWarning>
       <head>
         <SEOMetadata />
+        {/* ✅ Fixed: Add favicon links */}
+        <link rel="icon" href="/favicon.ico" sizes="any" />
+        <link rel="icon" href="/logo.webp" type="image/webp" />
+        <link rel="apple-touch-icon" href="/alasr192.png" />
       </head>
       <body className={`font-sans antialiased bg-white dark:bg-gray-900 transition-colors duration-300 min-h-screen flex flex-col`} suppressHydrationWarning>
         <ApolloWrapper>

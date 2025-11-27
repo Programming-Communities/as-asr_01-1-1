@@ -1,9 +1,21 @@
+/* components/blog/BlogItem/styles/base.css */
 .blog-item {
   transition: all 0.3s ease-in-out;
+  background-color: white !important;
+  color: #1f2937 !important; /* gray-800 - ensure text is visible */
+  border: 1px solid #e5e7eb !important;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1) !important;
+}
+
+.dark .blog-item {
+  background-color: #1f2937 !important;
+  color: #f9fafb !important; /* gray-50 */
+  border-color: #374151 !important;
 }
 
 .blog-item:hover {
   transform: translateY(-2px);
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1) !important;
 }
 
 .blog-image {
@@ -12,4 +24,35 @@
 
 .blog-item:hover .blog-image {
   transform: scale(1.05);
+}
+
+/* Ensure all text inside blog items is visible */
+.blog-item h1,
+.blog-item h2,
+.blog-item h3,
+.blog-item h4,
+.blog-item h5,
+.blog-item h6,
+.blog-item p,
+.blog-item span,
+.blog-item time,
+.blog-item div {
+  color: inherit !important;
+}
+
+/* Force specific text colors */
+.blog-item .text-gray-900 {
+  color: #111827 !important;
+}
+
+.dark .blog-item .dark\:text-white {
+  color: #ffffff !important;
+}
+
+.blog-item .text-gray-600 {
+  color: #4b5563 !important;
+}
+
+.dark .blog-item .dark\:text-gray-300 {
+  color: #d1d5db !important;
 }

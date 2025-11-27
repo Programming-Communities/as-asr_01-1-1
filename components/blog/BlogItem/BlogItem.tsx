@@ -38,7 +38,7 @@ export function BlogItem(props: BlogItemProps) {
     isCurrent = false
   } = props;
   
-  const { breakpoint } = useResponsive();
+  const responsive = useResponsive();
   
   // Create complete props object with all required fields
   const blogItemProps: BlogItemProps = { 
@@ -58,8 +58,14 @@ export function BlogItem(props: BlogItemProps) {
     isCurrent 
   };
 
-  // Use provided variant or determine from breakpoint
-  const currentVariant = variant || breakpoint;
+  // Use provided variant or determine from responsive
+  const currentVariant = variant || 
+    (responsive.isMobile && 'mobile') ||
+    (responsive.isTablet && 'tablet') || 
+    (responsive.isDesktop && 'desktop') ||
+    (responsive.isLg && 'lg') ||
+    (responsive.is4k && '4k') ||
+    'desktop'; // default
 
   switch (currentVariant) {
     case 'mobile':

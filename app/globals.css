@@ -4,21 +4,25 @@
 /* Fix for white/black screen */
 html, body {
   background-color: white;
+  color: #1f2937; /* gray-800 - default text color */
 }
 
 .dark html, .dark body {
   background-color: #111827; /* gray-900 */
+  color: #f9fafb; /* gray-50 */
 }
 
 /* Fix for blog cards visibility */
 .blog-item {
-  background-color: white;
-  border: 1px solid #e5e7eb;
+  background-color: white !important;
+  border: 1px solid #e5e7eb !important;
+  color: #1f2937 !important; /* Ensure text is visible */
 }
 
 .dark .blog-item {
-  background-color: #1f2937;
-  border-color: #374151;
+  background-color: #1f2937 !important;
+  border-color: #374151 !important;
+  color: #f9fafb !important;
 }
 
 /* Fix sidebar menu */
@@ -31,11 +35,79 @@ html, body {
   background-color: #1f2937;
 }
 
-/* Ensure blog cards are visible */
+/* Ensure blog cards are visible with proper text contrast */
 .bg-white {
   background-color: white !important;
+  color: #1f2937 !important; /* Add text color */
 }
 
 .dark .dark\:bg-gray-800 {
   background-color: #1f2937 !important;
+  color: #f9fafb !important; /* Add text color */
+}
+
+/* Fix text visibility in blog items */
+.text-gray-900 {
+  color: #111827 !important;
+}
+
+.dark .dark\:text-white {
+  color: #ffffff !important;
+}
+
+.text-gray-600 {
+  color: #4b5563 !important;
+}
+
+.dark .dark\:text-gray-300 {
+  color: #d1d5db !important;
+}
+
+/* Force visible text in all blog components */
+.blog-item * {
+  color: inherit !important;
+}
+
+/* Temporary debug borders - REMOVE AFTER TESTING */
+.blog-item {
+  border: 2px solid #dc2626 !important; /* red-600 */
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1) !important;
+}
+
+.blog-item h1,
+.blog-item h2,
+.blog-item h3,
+.blog-item h4,
+.blog-item h5,
+.blog-item h6 {
+  color: #111827 !important; /* gray-900 */
+}
+
+.dark .blog-item h1,
+.dark .blog-item h2,
+.dark .blog-item h3,
+.dark .blog-item h4,
+.dark .blog-item h5,
+.dark .blog-item h6 {
+  color: #ffffff !important;
+}
+
+.blog-item p {
+  color: #4b5563 !important; /* gray-600 */
+}
+
+.dark .blog-item p {
+  color: #d1d5db !important; /* gray-300 */
+}
+
+
+
+
+/* Temporary debug - Add to globals.css */
+.blog-item {
+  border: 2px solid red !important; /* Temporary - remove after testing */
+}
+
+.blog-item * {
+  border: 1px solid blue !important; /* Temporary - remove after testing */
 }

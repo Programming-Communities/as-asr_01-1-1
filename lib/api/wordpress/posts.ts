@@ -1,7 +1,6 @@
 // lib/api/wordpress/posts.ts
-import fetchGraphQL from './client'; 
 import { getClient } from './apollo-client';
-import { gql } from '@apollo/client'; // ✅ Add this import
+import { gql } from '@apollo/client';
 import { PostsResponse, PostResponse, PostsSlugsResponse } from '@/types/graphql';
 
 const POST_FIELDS = gql`
@@ -43,24 +42,6 @@ const POST_FIELDS = gql`
         id
         name
         slug
-      }
-    }
-    seo {
-      title
-      metaDesc
-      canonical
-      opengraphTitle
-      opengraphDescription
-      opengraphImage {
-        sourceUrl
-      }
-      twitterTitle
-      twitterDescription
-      twitterImage {
-        sourceUrl
-      }
-      schema {
-        raw
       }
     }
   }
@@ -116,7 +97,7 @@ export async function getPosts(first: number = 10) {
   }
 }
 
-export async function getPost(slug: string) {
+export async function getPostBySlug(slug: string) {
   try {
     const client = getClient();
     const { data } = await client.query<PostResponse>({
@@ -131,12 +112,13 @@ export async function getPost(slug: string) {
 
     return data.postBy;
   } catch (error) {
-    console.error('Error fetching post:', error);
+    console.error(`Error fetching post ${slug}:`, error);
     return null;
   }
 }
 
-export const getPostBySlug = getPost;
+// Alias for getPostBySlug
+export const getPost = getPostBySlug;
 
 export async function getAllPostsSlugs() {
   try {
@@ -150,9 +132,22 @@ export async function getAllPostsSlugs() {
       return [];
     }
 
-    return data.posts.nodes.map((node) => ({
-      slug: node.slug,
-    }));
+    // Filter out invalid slugs and log them
+    const validSlugs = data.posts.nodes
+      .filter(node => node.slug && node.slug.trim() !== '')
+      .map((node) => ({
+        slug: node.slug,
+      }));
+
+    console.log(`✅ Retrieved ${validSlugs.length} valid post slugs`);
+    
+    // Log any invalid slugs for debugging
+    const invalidSlugs = data.posts.nodes.filter(node => !node.slug || node.slug.trim() === '');
+    if (invalidSlugs.length > 0) {
+      console.warn(`⚠️ Found ${invalidSlugs.length} posts with invalid slugs`);
+    }
+
+    return validSlugs;
   } catch (error) {
     console.error('Error fetching post slugs:', error);
     return [];

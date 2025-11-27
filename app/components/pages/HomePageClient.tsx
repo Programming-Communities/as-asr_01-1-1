@@ -1,4 +1,3 @@
-// app/components/pages/HomePageClient.tsx
 'use client';
 
 import { useState, useEffect } from 'react';
@@ -10,8 +9,15 @@ export default function HomePageClient() {
   const [posts, setPosts] = useState<Post[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const [isMounted, setIsMounted] = useState(false);
 
   useEffect(() => {
+    setIsMounted(true);
+  }, []);
+
+  useEffect(() => {
+    if (!isMounted) return;
+
     const fetchPosts = async () => {
       try {
         setLoading(true);
@@ -22,12 +28,12 @@ export default function HomePageClient() {
         
         console.log('📦 API Response:', data);
         
-        if (data.success && data.posts) {
+        if (data && data.posts && Array.isArray(data.posts)) {
           setPosts(data.posts);
           console.log('✅ Posts loaded:', data.posts.length);
         } else {
-          setError(data.error || 'No posts found');
-          console.log('❌ API Error:', data.error);
+          setError('No posts found in response');
+          console.log('❌ API Data issue:', data);
         }
       } catch (err) {
         const errorMsg = 'Network error: ' + (err as Error).message;
@@ -39,11 +45,29 @@ export default function HomePageClient() {
     };
 
     fetchPosts();
-  }, []);
+  }, [isMounted]);
+
+  // Server-side render fallback
+  if (!isMounted) {
+    return (
+      <div className="min-h-screen bg-gradient-to-br from-red-50 to-pink-50">
+        <div className="container mx-auto px-4 py-8">
+          <div className="text-center mb-8">
+            <h2 className="text-2xl font-bold text-gray-900">Loading...</h2>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {[...Array(6)].map((_, index) => (
+              <CardLoader key={index} />
+            ))}
+          </div>
+        </div>
+      </div>
+    );
+  }
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-linear-to-br from-red-50 to-pink-50">
+      <div className="min-h-screen bg-gradient-to-br from-red-50 to-pink-50">
         <div className="container mx-auto px-4 py-8">
           <div className="text-center mb-8">
             <h2 className="text-2xl font-bold text-gray-900">Loading Posts...</h2>
@@ -60,13 +84,13 @@ export default function HomePageClient() {
 
   if (error) {
     return (
-      <div className="min-h-screen bg-linear-to-br from-red-50 to-pink-50 flex items-center justify-center">
+      <div className="min-h-screen bg-gradient-to-br from-red-50 to-pink-50 flex items-center justify-center">
         <div className="text-center">
           <h2 className="text-2xl font-bold text-red-600 mb-4">Error Loading Posts</h2>
           <p className="text-gray-600 mb-4">{error}</p>
           <button 
             onClick={() => window.location.reload()}
-            className="bg-red-500 text-white px-6 py-2 rounded-lg hover:bg-red-600"
+            className="bg-red-500 text-white px-6 py-2 rounded-lg hover:bg-red-600 transition-colors"
           >
             Retry
           </button>
@@ -76,9 +100,9 @@ export default function HomePageClient() {
   }
 
   return (
-    <div className="min-h-screen bg-linear-to-br from-red-50 to-pink-50">
+    <div className="min-h-screen bg-gradient-to-br from-red-50 to-pink-50">
       {/* Hero Section */}
-      <section className="bg-linear-to-r from-red-500 to-pink-500 text-white py-20">
+      <section className="bg-gradient-to-r from-red-500 to-pink-500 text-white py-20">
         <div className="container mx-auto px-4 text-center">
           <h1 className="text-4xl md:text-6xl font-bold mb-6">
             Al-Asr Centers
@@ -106,9 +130,10 @@ export default function HomePageClient() {
             📊 Debug Info: Found {posts.length} posts
           </p>
           {posts.length > 0 && (
-            <p className="text-xs text-blue-600 mt-1">
-              First post: "{posts[0].title}"
-            </p>
+            <div className="text-xs text-blue-600 mt-1 space-y-1">
+              <p>First post: "{posts[0].title}"</p>
+              <p>Post IDs: {posts.map(p => p.id).join(', ')}</p>
+            </div>
           )}
         </div>
 
@@ -130,15 +155,7 @@ export default function HomePageClient() {
           <div className="text-center py-12">
             <div className="bg-yellow-50 p-6 rounded-lg max-w-md mx-auto">
               <h3 className="text-xl font-semibold text-yellow-800 mb-2">No Posts Found</h3>
-              <p className="text-yellow-700">No published posts available in WordPress.</p>
-              <div className="mt-4 text-sm text-yellow-600 text-left">
-                <p className="font-semibold">Check:</p>
-                <ul className="list-disc list-inside mt-1 space-y-1">
-                  <li>WordPress posts are published</li>
-                  <li>API endpoint is correct</li>
-                  <li>Check browser console for errors</li>
-                </ul>
-              </div>
+              <p className="text-yellow-700">No published posts available.</p>
             </div>
           </div>
         )}

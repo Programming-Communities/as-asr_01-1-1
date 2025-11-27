@@ -1,12 +1,11 @@
-// hooks/useResponsive.ts
+'use client';
+
 import { useState, useEffect } from 'react';
 
-export type Breakpoint = 'mobile' | 'tablet' | 'desktop' | 'lg' | '4k';
-export type Device = Breakpoint; // Make Device include all breakpoints
+type DeviceType = 'mobile' | 'tablet' | 'desktop' | 'lg' | '4k';
 
-export interface UseResponsiveReturn {
-  breakpoint: Breakpoint;
-  device: Device;
+interface ResponsiveHook {
+  device: DeviceType;
   isMobile: boolean;
   isTablet: boolean;
   isDesktop: boolean;
@@ -14,38 +13,50 @@ export interface UseResponsiveReturn {
   is4k: boolean;
 }
 
-export function useResponsive(): UseResponsiveReturn {
-  const [breakpoint, setBreakpoint] = useState<Breakpoint>('desktop');
+export function useResponsive(): ResponsiveHook {
+  const [device, setDevice] = useState<DeviceType>('desktop');
 
   useEffect(() => {
-    const getBreakpoint = (width: number): Breakpoint => {
-      if (width < 768) return 'mobile';
-      if (width < 1024) return 'tablet';
-      if (width < 1280) return 'desktop';
-      if (width < 1920) return 'lg';
-      return '4k';
+    const checkDevice = () => {
+      const width = window.innerWidth;
+      
+      if (width < 768) {
+        setDevice('mobile');
+      } else if (width >= 768 && width < 1024) {
+        setDevice('tablet');
+      } else if (width >= 1024 && width < 1440) {
+        setDevice('desktop');
+      } else if (width >= 1440 && width < 1920) {
+        setDevice('lg');
+      } else {
+        setDevice('4k');
+      }
     };
 
-    const updateBreakpoint = () => {
-      setBreakpoint(getBreakpoint(window.innerWidth));
+    // Initial check
+    checkDevice();
+
+    // Debounced resize handler
+    let timeoutId: NodeJS.Timeout;
+    const handleResize = () => {
+      clearTimeout(timeoutId);
+      timeoutId = setTimeout(checkDevice, 100); // ✅ Fixed: Added debounce
     };
 
-    updateBreakpoint();
-    window.addEventListener('resize', updateBreakpoint);
-
-    return () => window.removeEventListener('resize', updateBreakpoint);
+    window.addEventListener('resize', handleResize);
+    
+    return () => {
+      window.removeEventListener('resize', handleResize);
+      clearTimeout(timeoutId);
+    };
   }, []);
 
-  // Device is now the same as breakpoint
-  const device: Device = breakpoint;
-
   return {
-    breakpoint,
     device,
-    isMobile: breakpoint === 'mobile',
-    isTablet: breakpoint === 'tablet',
-    isDesktop: breakpoint === 'desktop',
-    isLg: breakpoint === 'lg',
-    is4k: breakpoint === '4k',
+    isMobile: device === 'mobile',
+    isTablet: device === 'tablet',
+    isDesktop: device === 'desktop',
+    isLg: device === 'lg',
+    is4k: device === '4k',
   };
 }

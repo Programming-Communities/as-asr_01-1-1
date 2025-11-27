@@ -15,4 +15,5 @@ module.exports = {
     },
   },
   plugins: [],
+  important: true, // Add this to force Tailwind styles
 }

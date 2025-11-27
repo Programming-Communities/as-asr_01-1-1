@@ -1,12 +1,11 @@
 // lib/apollo-client.ts
 import { ApolloClient, InMemoryCache, createHttpLink } from '@apollo/client';
 
-// Use server-side environment variable (no NEXT_PUBLIC_ prefix)
-const WORDPRESS_GRAPHQL_URL = process.env.WORDPRESS_GRAPHQL_URL;
+// ✅ Temporary fix - remove error throw
+const WORDPRESS_GRAPHQL_URL = process.env.WORDPRESS_GRAPHQL_URL || 
+                              'https://admin-al-asr.centers.pk/graphql';
 
-if (!WORDPRESS_GRAPHQL_URL) {
-  throw new Error('WORDPRESS_GRAPHQL_URL environment variable is not set');
-}
+console.log('GraphQL URL:', WORDPRESS_GRAPHQL_URL); // Debug
 
 const httpLink = createHttpLink({
   uri: WORDPRESS_GRAPHQL_URL,
