@@ -1,20 +1,21 @@
-// components/shared/SocialShareButtons.tsx
 'use client';
 
 interface SocialShareButtonsProps {
   title: string;
-  excerpt: string;
   url: string;
+  excerpt?: string; // ✅ Make excerpt optional
+  onClose?: () => void;
 }
 
 export default function SocialShareButtons({ 
   title, 
-  excerpt, 
-  url 
+  url,
+  excerpt = '', // ✅ Default to empty string
+  onClose 
 }: SocialShareButtonsProps) {
   const shareUrl = encodeURIComponent(url);
   const shareTitle = encodeURIComponent(title);
-  const shareText = encodeURIComponent(excerpt);
+  const shareText = encodeURIComponent(excerpt || title); // ✅ Use excerpt or fallback to title
 
   const socialPlatforms = [
     {
@@ -54,6 +55,11 @@ export default function SocialShareButtons({
       `share-${platformName}`,
       `width=${width},height=${height},left=${left},top=${top}`
     );
+
+    // ✅ Call onClose after sharing
+    if (onClose) {
+      onClose();
+    }
   };
 
   return (
