@@ -64,7 +64,7 @@ export default function HomePageClient() {
   // Server-side render fallback
   if (!isMounted) {
     return (
-      <div className="min-h-screen bg-linear-to-br from-red-50 to-pink-50">
+      <div className="min-h-screen bg-gradient-to-br from-red-50 to-pink-50">
         <div className="container mx-auto px-4 py-8">
           <div className="text-center mb-8">
             <h2 className="text-2xl font-bold text-gray-900">Loading...</h2>
@@ -81,7 +81,7 @@ export default function HomePageClient() {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-linear-to-br from-red-50 to-pink-50">
+      <div className="min-h-screen bg-gradient-to-br from-red-50 to-pink-50">
         <div className="container mx-auto px-4 py-8">
           <div className="text-center mb-8">
             <h2 className="text-2xl font-bold text-gray-900">Loading Posts...</h2>
@@ -98,7 +98,7 @@ export default function HomePageClient() {
 
   if (error) {
     return (
-      <div className="min-h-screen bg-linear-to-br from-red-50 to-pink-50 flex items-center justify-center">
+      <div className="min-h-screen bg-gradient-to-br from-red-50 to-pink-50 flex items-center justify-center">
         <div className="text-center">
           <h2 className="text-2xl font-bold text-red-600 mb-4">Error Loading Posts</h2>
           <p className="text-gray-600 mb-4">{error}</p>
@@ -114,9 +114,9 @@ export default function HomePageClient() {
   }
 
   return (
-    <div className="min-h-screen bg-linear-to-br from-red-50 to-pink-50">
+    <div className="min-h-screen bg-gradient-to-br from-red-50 to-pink-50">
       {/* Hero Section */}
-      <section className="bg-linear-to-r from-red-500 to-pink-500 text-white py-20">
+      <section className="bg-gradient-to-r from-red-500 to-pink-500 text-white py-20">
         <div className="container mx-auto px-4 text-center">
           <h1 className="text-4xl md:text-6xl font-bold mb-6">
             Al-Asr Centers
@@ -138,8 +138,8 @@ export default function HomePageClient() {
           </p>
         </div>
 
-        {/* Debug Info */}
-        <div className="mb-6 p-4 bg-blue-50 rounded-lg">
+        {/* ✅ REMOVED DEBUG INFO SECTION - Delete this entire div */}
+        {/* <div className="mb-6 p-4 bg-blue-50 rounded-lg">
           <p className="text-sm text-blue-700 font-semibold">
             📊 Debug Info: Found {posts.length} posts
           </p>
@@ -149,7 +149,7 @@ export default function HomePageClient() {
               <p>Post IDs: {posts.map(p => p.id).join(', ')}</p>
             </div>
           )}
-        </div>
+        </div> */}
 
         {/* Posts Grid */}
         {posts.length > 0 ? (
